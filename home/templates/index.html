@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block start %}
+    <table class="container">
+    <tr>
+        <th>Sr</th>
+        <th>Name of Candidate</th>
+        <th>Age</th>
+        <th>Eligible for voting ?</th>
+    </tr>
+    {%for adami in peoples%} 
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{adami.Name}}</td>
+        <td>{{adami.Age}}</td>
+        <td>{% if people.age < 18 %}
+           Y
+          {% else %}
+            N
+          {% endif %}
+        </td>
+    </tr>
+    {%endfor%}
+    </table>
+{% endblock %}

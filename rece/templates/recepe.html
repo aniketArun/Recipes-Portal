@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block start %}
+    <div class="container mt-5">
+        <h2><em>Let's Explore !</em> Add Reciepies you which Know</h2>
+        <hr>
+        <form class="col-6 mx-auto shadow-lg px-4 py-5 card" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Reciepe Name</label>
+              <input type="text" name = "name" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Description</label>
+              <textarea id="" name="description" class="form-control"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Upload Image</label>
+                <input type="file" name = "recipe_image" class="form-control">
+              </div>
+            <button type="submit" class="btn btn-primary">Add Reciepe</button>
+          </form>
+          <form class="d-flex mt-4 container col-6 shadow-lg" role="search">
+            <input class="form-control me-2" name = "searchr" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success mx-2"name = "search_r" type="submit">Search</button>
+          </form>
+          <table class="table mt-5">
+            <thead>
+              <tr>
+                <th scope="col">Sr</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {%for record in records %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{record.name}}</td>
+                <td>{{record.description}}</td>
+                <td><img src="/media/{{record.reciepe_image}}" alt="" style="height: 100px;"></td>
+                <td>
+                  <a href="delete/{{record.id}}/" class="btn btn-danger m-2">Delete</button>
+                    <a href="update/{{record.id}}/" class="btn btn-primary">Update</button>
+                </td>
+              </tr>
+              {%endfor%}
+    </div>
+{% endblock %}
